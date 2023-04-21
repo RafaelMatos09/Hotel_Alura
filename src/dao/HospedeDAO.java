@@ -16,16 +16,17 @@ public class HospedeDAO {
 
     public void salvar(Hospedes hospedes) {
         try {
-            String sql = "INSERT INTO HOSPEDES (NOME, SOBRENOME,DATA_NASCIMENTO,NACIONALIDADE,TELEFONE, ID_RESERVA) VALUES (?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO HOSPEDES (ID, NOME, SOBRENOME,DATA_NASCIMENTO,NACIONALIDADE,TELEFONE, ID_RESERVA) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
             try (PreparedStatement pstm = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-                pstm.setString(1, hospedes.getNome());
-                pstm.setString(2, hospedes.getSobrenome());
-                pstm.setString(3, hospedes.getDataNascimento());
-                pstm.setString(4, hospedes.getNacionalidade());
-                pstm.setString(5, hospedes.getTelefone());
-                pstm.setString(6, hospedes.getReserva());
+                pstm.setInt(1, hospedes.getId());
+                pstm.setString(2, hospedes.getNome());
+                pstm.setString(3, hospedes.getSobrenome());
+                pstm.setString(4, hospedes.getDataNascimento());
+                pstm.setString(5, hospedes.getNacionalidade());
+                pstm.setString(6, hospedes.getTelefone());
+                pstm.setString(7, hospedes.getReserva());
 
                 pstm.execute();
 
@@ -44,7 +45,7 @@ public class HospedeDAO {
     public List<Hospedes> listar() {
         try {
             List<Hospedes> hospedes = new ArrayList<Hospedes>();
-            String sql = "SELECT NOME, SOBRENOME,DATA_NASCIMENTO,NACIONALIDADE,TELEFONE, ID_RESERVA FROM HOSPEDES";
+            String sql = "SELECT ID, NOME, SOBRENOME,DATA_NASCIMENTO,NACIONALIDADE,TELEFONE, ID_RESERVA FROM HOSPEDES";
 
             try (PreparedStatement pstm = connection.prepareStatement(sql)) {
                 pstm.execute();
@@ -60,7 +61,7 @@ public class HospedeDAO {
     public List<Hospedes> buscar(Reserva ct) {
         try {
             List<Hospedes> hospedes = new ArrayList<Hospedes>();
-            String sql = "SELECT NOME, SOBRENOME,DATA_NASCIMENTO,NACIONALIDADE,TELEFONE, ID_RESERVA FROM HOSPEDES WHERE ID_RESERVA = ?";
+            String sql = "SELECT ID, NOME, SOBRENOME,DATA_NASCIMENTO,NACIONALIDADE,TELEFONE, ID_RESERVA FROM HOSPEDES WHERE ID_RESERVA = ?";
 
             try (PreparedStatement pstm = connection.prepareStatement(sql)) {
                 pstm.setInt(1, ct.getId());
