@@ -16,17 +16,16 @@ public class HospedeDAO {
 
     public void salvar(Hospedes hospedes) {
         try {
-            String sql = "INSERT INTO HOSPEDES (ID, NOME, SOBRENOME,DATA_NASCIMENTO,NACIONALIDADE,TELEFONE, ID_RESERVA) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO HOSPEDES (NOME, SOBRENOME,DATA_NASCIMENTO,NACIONALIDADE,TELEFONE) VALUES (?, ?, ?, ?, ?)";
 
             try (PreparedStatement pstm = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-                pstm.setInt(1, hospedes.getId());
-                pstm.setString(2, hospedes.getNome());
-                pstm.setString(3, hospedes.getSobrenome());
-                pstm.setString(4, hospedes.getDataNascimento());
-                pstm.setString(5, hospedes.getNacionalidade());
-                pstm.setString(6, hospedes.getTelefone());
-                pstm.setString(7, hospedes.getReserva());
+                pstm.setString(1, hospedes.getNome());
+                pstm.setString(2, hospedes.getSobrenome());
+                pstm.setString(3, hospedes.getDataNascimento());
+                pstm.setString(4, hospedes.getNacionalidade());
+                pstm.setString(5, hospedes.getTelefone());
+
 
                 pstm.execute();
 
@@ -81,12 +80,12 @@ public class HospedeDAO {
                 stm.setInt(1, id);
                 stm.execute();
             }
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void alterar(String nome, String sobrenome, String dataNascimento, String nacionalidade, String telefone, Integer id){
+    public void alterar(String nome, String sobrenome, String dataNascimento, String nacionalidade, String telefone, Integer id) {
         try {
             try (PreparedStatement stm = connection.prepareStatement("UPDATE HOSPEDES H SET H.NOME = ?, H.SOBRENOME = ?, H.DATA_NASCIMENTO = ?, H.NACIONALIDADE = ?, H.TELEFONE = ? WHERE ID = ?")) {
                 stm.setString(1, nome);
@@ -97,12 +96,10 @@ public class HospedeDAO {
                 stm.setInt(6, id);
                 stm.execute();
             }
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-
-
 
 
     private void transformarResultSetEmHospedes(List<Hospedes> hospede, PreparedStatement pstm) {

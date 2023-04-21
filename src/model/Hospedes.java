@@ -9,23 +9,24 @@ public class Hospedes {
     private String telefone;
     private String reserva;
 
-    public Hospedes(String nome, String sobrenome, String dataNascimento, String nacionalidade, String telefone, String reserva){
+    public Hospedes(String nome, String sobrenome, String dataNascimento, String nacionalidade, String telefone, String reserva) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.dataNascimento = dataNascimento;
         this.nacionalidade = nacionalidade;
         this.telefone = telefone;
         this.reserva = reserva;
+
     }
 
-    public Hospedes(Integer id,String nome, String sobrenome, String dataNascimento, String nacionalidade, String telefone, String reserva){
-        this.id = id;
+    public Hospedes(String nome, String sobrenome, String dataNascimento, String nacionalidade, String telefone) {
+
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.dataNascimento = dataNascimento;
         this.nacionalidade = nacionalidade;
         this.telefone = telefone;
-        this.reserva = reserva;
+
     }
 
     public String getNome() {
@@ -48,13 +49,12 @@ public class Hospedes {
         return telefone;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-
     public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getReserva() {
