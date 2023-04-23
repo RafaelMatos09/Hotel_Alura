@@ -19,15 +19,6 @@ public class Hospedes {
 
     }
 
-    public Hospedes(String nome, String sobrenome, String dataNascimento, String nacionalidade, String telefone) {
-
-        this.nome = nome;
-        this.sobrenome = sobrenome;
-        this.dataNascimento = dataNascimento;
-        this.nacionalidade = nacionalidade;
-        this.telefone = telefone;
-
-    }
 
     public String getNome() {
         return nome;
