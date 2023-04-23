@@ -9,6 +9,7 @@ public class Reserva {
     private Date dataEntradaC;
     private Date dataSaidaC;
     private float valor;
+    private String valorStr;
     private String formaPagamento;
     private String dataEntrada;
     private String dataSaida;
@@ -23,12 +24,12 @@ public class Reserva {
         this.valor = caclValorDiaria();
     }
 
-    public Reserva(Integer id, String dataEntrada, String dataSaida, float valor, String formaPagamento){
+    public Reserva(Integer id, String dataEntrada, String dataSaida, String valorStr, String formaPagamento){
         this.id = id;
         this.dataEntrada = dataEntrada;
         this.dataSaida = dataSaida;
         this.formaPagamento = formaPagamento;
-        this.valor = valor;
+        this.valorStr = valorStr;
     }
 
     public Reserva() {
@@ -51,6 +52,10 @@ public class Reserva {
 
     public String getDataSaida() {
         return dataSaida;
+    }
+
+    public String getValorStr() {
+        return valorStr;
     }
 
     public float getValor() {

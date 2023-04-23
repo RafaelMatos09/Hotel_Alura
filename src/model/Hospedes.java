@@ -1,5 +1,7 @@
 package model;
 
+import model.Reserva;
+
 public class Hospedes {
     private Integer id;
     private String nome;
@@ -8,6 +10,7 @@ public class Hospedes {
     private String nacionalidade;
     private String telefone;
     private Integer reserva;
+
 
     public Hospedes(String nome, String sobrenome, String dataNascimento, String nacionalidade, String telefone, Integer reserva) {
         this.nome = nome;
@@ -51,4 +54,6 @@ public class Hospedes {
     public Integer getReserva() {
         return reserva;
     }
+
+
 }

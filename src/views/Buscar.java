@@ -1,22 +1,12 @@
 package views;
 
 import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.ImageIcon;
 import java.awt.Color;
-import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.JTabbedPane;
 import java.awt.Toolkit;
-import javax.swing.SwingConstants;
-import javax.swing.JSeparator;
-import javax.swing.ListSelectionModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -97,7 +87,7 @@ public class Buscar extends JFrame {
         tbHospedes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tbHospedes.setFont(new Font("Roboto", Font.PLAIN, 16));
         modeloHospedes = (DefaultTableModel) tbHospedes.getModel();
-        modeloHospedes.addColumn("");
+        modeloHospedes.addColumn("ID");
         modeloHospedes.addColumn("Numero de Hóspede");
         modeloHospedes.addColumn("Nome");
         modeloHospedes.addColumn("Sobrenome");
@@ -105,6 +95,9 @@ public class Buscar extends JFrame {
         modeloHospedes.addColumn("Nacionalidade");
         modeloHospedes.addColumn("Telefone");
         modeloHospedes.addColumn("Numero de Reserva");
+        tbHospedes.getColumnModel().getColumn(0).setMinWidth(0);
+        tbHospedes.getColumnModel().getColumn(0).setMaxWidth(0);
+        tbHospedes.getColumnModel().getColumn(0).setWidth(0);
         JScrollPane scroll_tableHuespedes = new JScrollPane(tbHospedes);
         panel.addTab("Huéspedes", new ImageIcon(Buscar.class.getResource("/imagenes/pessoas.png")), scroll_tableHuespedes, null);
         scroll_tableHuespedes.setVisible(true);
@@ -226,6 +219,12 @@ public class Buscar extends JFrame {
         lblBuscar.setFont(new Font("Roboto", Font.PLAIN, 18));
 
         JPanel btnEditar = new JPanel();
+        btnEditar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                alterarN(panel);
+            }
+        });
         btnEditar.setLayout(null);
         btnEditar.setBackground(new Color(12, 138, 199));
         btnEditar.setBounds(635, 508, 122, 35);
@@ -233,11 +232,12 @@ public class Buscar extends JFrame {
         contentPane.add(btnEditar);
 
         JLabel lblEditar = new JLabel("EDITAR");
+        lblEditar.setBounds(0, 0, 122, 35);
+        btnEditar.add(lblEditar);
         lblEditar.setHorizontalAlignment(SwingConstants.CENTER);
         lblEditar.setForeground(Color.WHITE);
         lblEditar.setFont(new Font("Roboto", Font.PLAIN, 18));
-        lblEditar.setBounds(0, 0, 122, 35);
-        btnEditar.add(lblEditar);
+
 
         JPanel btnDeletar = new JPanel();
         btnDeletar.setLayout(null);
@@ -285,14 +285,14 @@ public class Buscar extends JFrame {
 
     private void preencherTabelaReserva() {
         modelo.setRowCount(0);
-        List<Reserva> reservas = listarReserva();
+        List<Reserva> reservas = reservaController.listar();
         try {
             for (Reserva reserva : reservas) {
                 Object[] rowData = new Object[5];
                 rowData[0] = reserva.getId();
                 rowData[1] = reserva.getDataEntrada();
                 rowData[2] = reserva.getDataSaida();
-                rowData[3] = reserva.getValor();
+                rowData[3] = reserva.getValorStr();
                 rowData[4] = reserva.getFormaPagamento();
 
                 modelo.addRow(rowData);
@@ -305,7 +305,7 @@ public class Buscar extends JFrame {
 
     private void preencherTabelaHospedes() {
         modeloHospedes.setRowCount(0); // Limpa as linhas da tabela
-        List<Hospedes> hospedes = listarHospedes();
+        List<Hospedes> hospedes = hospedesController.listar();
         try {
             for (Hospedes hospede : hospedes) {
                 Object[] rowData = new Object[7]; // Cria um array para guardar os dados de uma linha da tabela
@@ -324,6 +324,43 @@ public class Buscar extends JFrame {
         }
 
     }
+
+    private void alterarN(JTabbedPane panel) {
+
+        int activeTabIndex = panel.getSelectedIndex();
+        int tabReservas = 0;
+        int tabHospedes = 1;
+
+        if (activeTabIndex == tabReservas) {
+            Object objetoDaLinha = (Object) modelo.getValueAt(tbReservas.getSelectedRow(), tbReservas.getSelectedColumn());
+            if (objetoDaLinha instanceof Integer) {
+                Integer id = (Integer) objetoDaLinha;
+                String dataEntrada = (String) modelo.getValueAt(tbReservas.getSelectedRow(), 1);
+                String dataSaida = (String) modelo.getValueAt(tbReservas.getSelectedRow(), 2);
+                String valor = (String) modelo.getValueAt(tbReservas.getSelectedRow(), 3);
+                String formaPagamento = (String) modelo.getValueAt(tbReservas.getSelectedRow(), 4);
+                this.reservaController.alterar(dataEntrada, dataSaida, valor, formaPagamento, id);
+                JOptionPane.showMessageDialog(this, "Alterado com sucesso!");
+            }
+        } else if (activeTabIndex == tabHospedes) {
+            Object objetoDaLinha = (Object) modeloHospedes.getValueAt(tbHospedes.getSelectedRow(), tbHospedes.getSelectedColumn());
+            if (objetoDaLinha instanceof Integer) {
+                Integer id = (Integer) objetoDaLinha;
+                String nome = (String) modeloHospedes.getValueAt(tbHospedes.getSelectedRow(), 1);
+                String sobrenome = (String) modeloHospedes.getValueAt(tbHospedes.getSelectedRow(), 2);
+                String dataNascimento = (String) modeloHospedes.getValueAt(tbHospedes.getSelectedRow(), 3);
+                String nacionalidade = (String) modeloHospedes.getValueAt(tbHospedes.getSelectedRow(), 4);
+                String telefone = (String) modeloHospedes.getValueAt(tbHospedes.getSelectedRow(), 5);
+                this.hospedesController.alterar(nome, sobrenome, dataNascimento, nacionalidade, telefone, id);
+                JOptionPane.showMessageDialog(this, "Alterado com sucesso!");
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Por favor, selecionar o ID");
+
+            }
+        }
+    }
+
 
     private List<Reserva> listarReserva() {
         return this.reservaController.listar();

@@ -22,4 +22,9 @@ public class ReservaController {
     public List<Reserva> listar() {
         return this.reservaDAO.listar();
     }
+
+    public void alterar(String dataEntrada, String dataSaida, String valor,String formaPagamento, Integer id){
+        this.reservaDAO.alterar(dataEntrada, dataSaida, valor, formaPagamento, id);
+    }
+
 }

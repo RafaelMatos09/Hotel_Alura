@@ -28,7 +28,7 @@ public class HospedesController {
         return this.hospedeDAO.listar();
     }
 
-    public void alterar(String nome, String sobrenome, String dataNascimento, String nacionalidade, String telefone, Integer id) {
+    public void alterar( String nome, String sobrenome, String dataNascimento, String nacionalidade, String telefone, Integer id) {
         this.hospedeDAO.alterar(nome, sobrenome, dataNascimento, nacionalidade, telefone, id);
     }
 }

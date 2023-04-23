@@ -76,7 +76,7 @@ public class ReservaDAO {
         }
     }
 
-    private void deletar(Integer id) {
+    public void deletar(Integer id) {
         try {
             try (PreparedStatement stm = connection.prepareStatement("DELETE FROM RESERVAS WHERE ID = ?")) {
                 stm.setInt(1, id);
@@ -88,13 +88,15 @@ public class ReservaDAO {
 
     }
 
-    private void alterar(String dataEntrada, String dataSaida, String formaPagamento) {
+    public void alterar(String dataEntrada, String dataSaida, String valor, String formaPagamento, Integer id) {
 
         try {
-            try (PreparedStatement stm = connection.prepareStatement("UPDATE RESERVA P SET P.DATA_ENTRADA = ?, P.DATA_SAIDA = ?, P.FORMA_PAGAMENTO = ?")) {
+            try (PreparedStatement stm = connection.prepareStatement("UPDATE RESERVAS P SET P.DATA_ENTRADA = ?, P.DATA_SAIDA = ?, P.VALOR = ? , P.FORMA_PAGAMENTO = ? WHERE ID = ?")) {
                 stm.setString(1, dataEntrada);
                 stm.setString(2, dataSaida);
-                stm.setString(3, formaPagamento);
+                stm.setString(3, valor);
+                stm.setString(4, formaPagamento);
+                stm.setInt(5, id);
                 stm.execute();
             }
         } catch (SQLException e) {
@@ -106,7 +108,7 @@ public class ReservaDAO {
         try {
             try (ResultSet rst = pstm.getResultSet()) {
                 while (rst.next()) {
-                    Reserva reservas = new Reserva(rst.getInt(1), rst.getString(2), rst.getString(3), rst.getFloat(4), rst.getString(5));
+                    Reserva reservas = new Reserva(rst.getInt(1), rst.getString(2), rst.getString(3), rst.getString(4), rst.getString(5));
                     reserva.add(reservas);
                 }
             }
