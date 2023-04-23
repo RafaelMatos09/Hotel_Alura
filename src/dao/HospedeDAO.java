@@ -16,7 +16,7 @@ public class HospedeDAO {
 
     public void salvar(Hospedes hospedes) {
         try {
-            String sql = "INSERT INTO HOSPEDES (NOME, SOBRENOME,DATA_NASCIMENTO,NACIONALIDADE,TELEFONE) VALUES (?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO HOSPEDES (NOME, SOBRENOME,DATA_NASCIMENTO,NACIONALIDADE,TELEFONE, ID_RESERVA) VALUES (?, ?, ?, ?, ?, ?)";
 
             try (PreparedStatement pstm = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -25,7 +25,7 @@ public class HospedeDAO {
                 pstm.setString(3, hospedes.getDataNascimento());
                 pstm.setString(4, hospedes.getNacionalidade());
                 pstm.setString(5, hospedes.getTelefone());
-
+                pstm.setInt(6, hospedes.getReserva());
 
                 pstm.execute();
 
@@ -106,7 +106,7 @@ public class HospedeDAO {
         try {
             try (ResultSet rst = pstm.getResultSet()) {
                 while (rst.next()) {
-                    Hospedes hospedes = new Hospedes(rst.getString(1), rst.getString(2), rst.getString(3), rst.getString(4), rst.getString(5), rst.getString(6));
+                    Hospedes hospedes = new Hospedes(rst.getString(1), rst.getString(2), rst.getString(3), rst.getString(4), rst.getString(5), rst.getInt(6));
 
                     hospede.add(hospedes);
                 }

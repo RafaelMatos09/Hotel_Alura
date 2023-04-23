@@ -7,9 +7,9 @@ public class Hospedes {
     private String dataNascimento;
     private String nacionalidade;
     private String telefone;
-    private String reserva;
+    private Integer reserva;
 
-    public Hospedes(String nome, String sobrenome, String dataNascimento, String nacionalidade, String telefone, String reserva) {
+    public Hospedes(String nome, String sobrenome, String dataNascimento, String nacionalidade, String telefone, Integer reserva) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.dataNascimento = dataNascimento;
@@ -57,7 +57,7 @@ public class Hospedes {
         this.id = id;
     }
 
-    public String getReserva() {
+    public Integer getReserva() {
         return reserva;
     }
 }
