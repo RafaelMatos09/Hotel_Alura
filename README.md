@@ -27,7 +27,7 @@ Desafio proposto pela Oracle ONE turma 4, desenvolver o back end de um hotel, co
 <br>
 <h2>🛠️ Abrir e rodar o projeto</h2>
 
-Para rodar o projeto você pode baixar o arquivo compactado e depois extrair em uma pasta de repositorio, e abrir em uma ide.
+Para executar o projeto, faça o download e extraia o arquivo compactado em uma pasta de repositório. Em seguida, abra-o em sua IDE preferida. Antes de executar, verifique se as dependências necessárias estão instaladas e siga as instruções de configuração.
 
 <h2> 🧑 Tecnologias utilizadas </h2>
 
