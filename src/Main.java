@@ -2,6 +2,7 @@ import dao.HospedeDAO;
 import factory.ConnectionFactory;
 import model.Hospedes;
 import views.Login;
+import views.MenuPrincipal;
 
 import java.awt.*;
 import java.sql.Connection;
@@ -12,7 +13,7 @@ public class Main {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    Login frame = new Login();
+                    MenuPrincipal frame = new MenuPrincipal();
                     frame.setVisible(true);
                     frame.setLocationRelativeTo(null);
                 } catch (Exception e) {
