@@ -27,7 +27,7 @@ https://user-images.githubusercontent.com/11903546/235318157-35b5c7ca-71ac-40dd-
 
 <h2 align="left">:hammer: Funcionalidades</h2>
 
-<strong>Conversor de Moedas</strong>
+<strong>Hotel Alura</strong>
         
 - Sistema de autenticação de usuários para que somente usuários pertencentes ao hotel possam acessar o sistema
 - Permitir criar, editar e excluir uma reserva para clientes
