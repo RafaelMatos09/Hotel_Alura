@@ -87,7 +87,6 @@ public class Buscar extends JFrame {
         tbHospedes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tbHospedes.setFont(new Font("Roboto", Font.PLAIN, 16));
         modeloHospedes = (DefaultTableModel) tbHospedes.getModel();
-        modeloHospedes.addColumn("ID");
         modeloHospedes.addColumn("Numero de Hóspede");
         modeloHospedes.addColumn("Nome");
         modeloHospedes.addColumn("Sobrenome");
@@ -95,9 +94,6 @@ public class Buscar extends JFrame {
         modeloHospedes.addColumn("Nacionalidade");
         modeloHospedes.addColumn("Telefone");
         modeloHospedes.addColumn("Numero de Reserva");
-        tbHospedes.getColumnModel().getColumn(0).setMinWidth(0);
-        tbHospedes.getColumnModel().getColumn(0).setMaxWidth(0);
-        tbHospedes.getColumnModel().getColumn(0).setWidth(0);
         JScrollPane scroll_tableHuespedes = new JScrollPane(tbHospedes);
         panel.addTab("Huéspedes", new ImageIcon(Buscar.class.getResource("/imagenes/pessoas.png")), scroll_tableHuespedes, null);
         scroll_tableHuespedes.setVisible(true);

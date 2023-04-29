@@ -22,6 +22,17 @@ public class Hospedes {
 
     }
 
+    public Hospedes(Integer id, String nome, String sobrenome, String dataNascimento, String nacionalidade, String telefone, Integer reserva) {
+        this.id = id;
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.dataNascimento = dataNascimento;
+        this.nacionalidade = nacionalidade;
+        this.telefone = telefone;
+        this.reserva = reserva;
+
+    }
+
 
     public String getNome() {
         return nome;

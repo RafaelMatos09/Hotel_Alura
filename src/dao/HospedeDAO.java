@@ -106,7 +106,7 @@ public class HospedeDAO {
         try {
             try (ResultSet rst = pstm.getResultSet()) {
                 while (rst.next()) {
-                    Hospedes hospedes = new Hospedes(rst.getString(1), rst.getString(2), rst.getString(3), rst.getString(4), rst.getString(5), rst.getInt(6));
+                    Hospedes hospedes = new Hospedes(rst.getInt(1), rst.getString(2), rst.getString(3), rst.getString(4), rst.getString(5), rst.getString(6), rst.getInt(7));
 
                     hospede.add(hospedes);
                 }
