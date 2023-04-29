@@ -375,7 +375,7 @@ public class ReservasView extends JFrame {
         if (txtDataE.getDate() != null && txtDataS.getDate() != null) {
             Calendar inicio = dataEntrada.getCalendar();
             Calendar fim = dataSaida.getCalendar();
-            int diaria = 120;
+            int diaria = 20;
             int dias = -1;
             int valor;
 

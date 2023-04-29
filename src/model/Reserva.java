@@ -67,7 +67,7 @@ public class Reserva {
     }
 
     public float caclValorDiaria() {
-        float diaria = 120;
+        float diaria = 20;
         float calc = diferencaEmdias() * diaria;
         return calc;
     }
