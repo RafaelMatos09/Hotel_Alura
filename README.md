@@ -1,6 +1,12 @@
 <h1 align="center"> Challenge ONE
 Back End - Java </h1>
 
+<h1 align="center">
+<img src="https://user-images.githubusercontent.com/11903546/235318984-6bc97465-ce3f-4dc8-bb32-e8c89a0695be.png" width="350" height="350" />
+</h1>
+
+
+
 <p align="center">
 <img src="http://img.shields.io/static/v1?label=STATUS&message=%20CONCLUIDO&color=GREEN&style=for-the-badge"/>
 </p>
