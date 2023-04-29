@@ -10,6 +10,7 @@ import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.util.ArrayList;
 import java.util.List;
 
 import model.Reserva;
@@ -198,7 +199,7 @@ public class Buscar extends JFrame {
         btnbuscar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                buscarN(panel);
             }
         });
         btnbuscar.setLayout(null);
@@ -236,6 +237,12 @@ public class Buscar extends JFrame {
 
 
         JPanel btnDeletar = new JPanel();
+        btnDeletar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                deletarN(panel);
+            }
+        });
         btnDeletar.setLayout(null);
         btnDeletar.setBackground(new Color(12, 138, 199));
         btnDeletar.setBounds(767, 508, 122, 35);
@@ -353,6 +360,94 @@ public class Buscar extends JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Por favor, selecionar o ID");
 
+            }
+        }
+    }
+
+    private void deletarN(JTabbedPane panel) {
+        int activeTabIndex = panel.getSelectedIndex();
+        int tabReservas = 0;
+        int tabHospedes = 1;
+
+        if (activeTabIndex == tabReservas) {
+            Object objetoDaLinha = (Object) modelo.getValueAt(tbReservas.getSelectedRow(), tbReservas.getSelectedColumn());
+            if (objetoDaLinha instanceof Integer) {
+                Integer id = (Integer) objetoDaLinha;
+                this.reservaController.deletar(id);
+                modelo.removeRow(tbReservas.getSelectedRow());
+                JOptionPane.showMessageDialog(this, "Item excluido com sucesso!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Por favor, selecionar o ID");
+            }
+        } else if (activeTabIndex == tabHospedes) {
+            Object objetoDaLinha = (Object) modeloHospedes.getValueAt(tbHospedes.getSelectedRow(), tbHospedes.getSelectedColumn());
+            if (objetoDaLinha instanceof Integer) {
+                Integer id = (Integer) objetoDaLinha;
+                this.hospedesController.deletar(id);
+                modeloHospedes.removeRow(tbHospedes.getSelectedRow());
+                JOptionPane.showMessageDialog(this, "Item excluido com sucesso!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Por favor, selecionar o ID");
+            }
+        }
+    }
+
+    private void buscarN(JTabbedPane panel) {
+        int activeTabIndex = panel.getSelectedIndex();
+        int tabReservas = 0;
+        int tabHospedes = 1;
+
+        if (activeTabIndex == tabReservas) {
+            modelo.setRowCount(0);
+            List<Reserva> reservasEncontradas = new ArrayList<>();
+
+            if (txtBuscar.getText().matches("\\d+")) {
+                reservasEncontradas = reservaController.buscar(Integer.parseInt(txtBuscar.getText()));
+            }
+
+            try {
+                modelo.setRowCount(0);
+                if (reservasEncontradas.size() > 0) {
+                    for (Reserva reserva : reservasEncontradas) {
+                        Object[] rowData = new Object[5];
+                        rowData[0] = reserva.getId();
+                        rowData[1] = reserva.getDataEntrada();
+                        rowData[2] = reserva.getDataSaida();
+                        rowData[3] = reserva.getValorStr();
+                        rowData[4] = reserva.getFormaPagamento();
+
+                        modelo.addRow(rowData);
+                    }
+                } else {
+                    preencherTabelaReserva();
+                }
+            } catch (Exception e) {
+                throw e;
+            }
+
+
+        } else if (activeTabIndex == tabHospedes) {
+            modeloHospedes.setRowCount(0);
+            List<Hospedes> hospedesEncontrados = hospedesController.buscar(txtBuscar.getText());
+            try {
+                if (!txtBuscar.equals(" ")) {
+                    for (Hospedes hospede : hospedesEncontrados) {
+                        Object[] rowData = new Object[7]; // Cria um array para guardar os dados de uma linha da tabela
+                        rowData[0] = hospede.getId();
+                        rowData[1] = hospede.getNome();
+                        rowData[2] = hospede.getSobrenome();
+                        rowData[3] = hospede.getDataNascimento();
+                        rowData[4] = hospede.getNacionalidade();
+                        rowData[5] = hospede.getTelefone();
+                        rowData[6] = hospede.getReserva(); // Adiciona o número de reserva à última coluna da linha
+
+                        modeloHospedes.addRow(rowData);
+                    }
+                } else {
+                    preencherTabelaHospedes();
+                }
+            } catch (Exception e) {
+                throw e;
             }
         }
     }

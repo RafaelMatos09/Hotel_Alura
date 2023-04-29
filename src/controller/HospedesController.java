@@ -3,6 +3,7 @@ package controller;
 import dao.HospedeDAO;
 import factory.ConnectionFactory;
 import model.Hospedes;
+import model.Reserva;
 
 import java.sql.Connection;
 import java.util.List;
@@ -28,7 +29,12 @@ public class HospedesController {
         return this.hospedeDAO.listar();
     }
 
-    public void alterar( String nome, String sobrenome, String dataNascimento, String nacionalidade, String telefone, Integer id) {
+    public void alterar(String nome, String sobrenome, String dataNascimento, String nacionalidade, String telefone, Integer id) {
         this.hospedeDAO.alterar(nome, sobrenome, dataNascimento, nacionalidade, telefone, id);
     }
+
+    public List<Hospedes> buscar(String nome) {
+        return this.hospedeDAO.buscarPorNome(nome);
+    }
+
 }

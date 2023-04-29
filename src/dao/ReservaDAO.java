@@ -59,13 +59,13 @@ public class ReservaDAO {
         }
     }
 
-    public List<Reserva> buscar(Reserva ct) {
+    public List<Reserva> buscarPorReserva(Integer id) {
         try {
-            List<Reserva> reservas = new ArrayList<>();
-            String sql = "SELECT DATA_ENTRADA, DATA_SAIDA, VALOR, FORMA_PAGAMENTO WHERE ID = ?";
+            List<Reserva> reservas = new ArrayList<Reserva>();
+            String sql = "SELECT ID, DATA_ENTRADA, DATA_SAIDA, VALOR, FORMA_PAGAMENTO FROM RESERVAS WHERE ID LIKE ?";
 
             try (PreparedStatement pstm = connection.prepareStatement(sql)) {
-                pstm.setInt(1, ct.getId());
+                pstm.setString(1, "%" + id + "%");
                 pstm.execute();
 
                 transformarResultSetEmReservas(reservas, pstm);

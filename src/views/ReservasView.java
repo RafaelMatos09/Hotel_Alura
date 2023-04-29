@@ -40,12 +40,12 @@ import model.Reserva;
 @SuppressWarnings("serial")
 public class ReservasView extends JFrame {
 
-    private JPanel contentPane;
     public static JTextField txtValor;
     public static JDateChooser txtDataE;
     public static JDateChooser txtDataS;
     public static JComboBox<String> txtFormaPagamento;
     int xMouse, yMouse;
+    private JPanel contentPane;
     private JLabel labelExit;
     private JLabel lblValorSimbolo;
     private JLabel labelAtras;
@@ -54,22 +54,6 @@ public class ReservasView extends JFrame {
     private String calcInicioStr;
     private Date calFim;
     private String calcFimStr;
-
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    ReservasView frame = new ReservasView();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
 
     /**
      * Create the frame.
@@ -348,6 +332,21 @@ public class ReservasView extends JFrame {
 
     }
 
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    ReservasView frame = new ReservasView();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 
     //Código que permite movimentar a janela pela tela seguindo a posição de "x" e "y"
     private void headerMousePressed(java.awt.event.MouseEvent evt) {
@@ -387,7 +386,6 @@ public class ReservasView extends JFrame {
             valor = dias * diaria;
             txtValor.setText(" " + valor);
         }
-
 
 
     }

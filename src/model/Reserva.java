@@ -24,7 +24,7 @@ public class Reserva {
         this.valor = caclValorDiaria();
     }
 
-    public Reserva(Integer id, String dataEntrada, String dataSaida, String valorStr, String formaPagamento){
+    public Reserva(Integer id, String dataEntrada, String dataSaida, String valorStr, String formaPagamento) {
         this.id = id;
         this.dataEntrada = dataEntrada;
         this.dataSaida = dataSaida;

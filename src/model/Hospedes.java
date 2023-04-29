@@ -33,26 +33,38 @@ public class Hospedes {
 
     }
 
+    public Hospedes() {
+
+    }
+
 
     public String getNome() {
         return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getSobrenome() {
         return sobrenome;
     }
 
+
     public String getDataNascimento() {
         return dataNascimento;
     }
+
 
     public String getNacionalidade() {
         return nacionalidade;
     }
 
+
     public String getTelefone() {
         return telefone;
     }
+
 
     public Integer getId() {
         return id;

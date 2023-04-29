@@ -5,6 +5,7 @@ import model.Reserva;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class HospedeDAO {
@@ -57,22 +58,6 @@ public class HospedeDAO {
         }
     }
 
-    public List<Hospedes> buscar(Reserva ct) {
-        try {
-            List<Hospedes> hospedes = new ArrayList<Hospedes>();
-            String sql = "SELECT ID, NOME, SOBRENOME,DATA_NASCIMENTO,NACIONALIDADE,TELEFONE, ID_RESERVA FROM HOSPEDES WHERE ID_RESERVA = ?";
-
-            try (PreparedStatement pstm = connection.prepareStatement(sql)) {
-                pstm.setInt(1, ct.getId());
-                pstm.execute();
-
-                transformarResultSetEmHospedes(hospedes, pstm);
-            }
-            return hospedes;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     public void deletarHospede(Integer id) {
         try {
@@ -96,6 +81,23 @@ public class HospedeDAO {
                 stm.setInt(6, id);
                 stm.execute();
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<Hospedes> buscarPorNome(String nome) {
+        try {
+            List<Hospedes> hospedes = new ArrayList<Hospedes>();
+            String sql = "SELECT ID, NOME, SOBRENOME,DATA_NASCIMENTO,NACIONALIDADE,TELEFONE, ID_RESERVA FROM HOSPEDES WHERE NOME LIKE ?";
+
+            try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+                pstm.setString(1, "%" + nome + "%");
+                pstm.execute();
+
+                transformarResultSetEmHospedes(hospedes, pstm);
+            }
+            return hospedes;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

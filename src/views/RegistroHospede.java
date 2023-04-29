@@ -25,6 +25,7 @@ import model.Hospedes;
 @SuppressWarnings("serial")
 public class RegistroHospede extends JFrame {
 
+    int xMouse, yMouse;
     private JPanel contentPane;
     private JTextField txtNome;
     private JTextField txtSobrenome;
@@ -34,24 +35,7 @@ public class RegistroHospede extends JFrame {
     private JComboBox<Format> txtNacionalidade;
     private JLabel labelExit;
     private JLabel labelAtras;
-    int xMouse, yMouse;
     private HospedesController hospedesController;
-
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    RegistroHospede frame = new RegistroHospede();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
 
     /**
      * Create the frame.
@@ -318,6 +302,22 @@ public class RegistroHospede extends JFrame {
         logo.setBounds(194, 39, 104, 107);
         panel.add(logo);
         logo.setIcon(new ImageIcon(RegistroHospede.class.getResource("/imagenes/Ha-100px.png")));
+    }
+
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    RegistroHospede frame = new RegistroHospede();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     //Código que permite movimentar a janela pela tela seguindo a posição de "x" y "y"
