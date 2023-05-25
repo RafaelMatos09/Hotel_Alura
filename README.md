@@ -1,8 +1,14 @@
 <h1 align="center"> Challenge ONE
 Back End - Java </h1>
 
+<h1 align="center">
+<img src="https://user-images.githubusercontent.com/11903546/235318984-6bc97465-ce3f-4dc8-bb32-e8c89a0695be.png" width="350" height="350" />
+</h1>
+
+
+
 <p align="center">
-<img src="http://img.shields.io/static/v1?label=STATUS&message=%20EM-DESENVOLVIMENTO&color=GREEN&style=for-the-badge"/>
+<img src="http://img.shields.io/static/v1?label=STATUS&message=%20CONCLUIDO&color=GREEN&style=for-the-badge"/>
 </p>
  
 <h2 align="left"> 📖 Descrição </h2>
@@ -10,12 +16,18 @@ Back End - Java </h1>
 Desafio proposto pela Oracle ONE turma 4, desenvolver o back end de um hotel, com sistemas de reservas para hospedes.
 
 <br><br>
-/// ESPAÇO PARA VIDEO
+
+
+
+https://user-images.githubusercontent.com/11903546/235318157-35b5c7ca-71ac-40dd-a552-3233dbb38bf5.mp4
+
+
+
 <br><br>
 
 <h2 align="left">:hammer: Funcionalidades</h2>
 
-<strong>Conversor de Moedas</strong>
+<strong>Hotel Alura</strong>
         
 - Sistema de autenticação de usuários para que somente usuários pertencentes ao hotel possam acessar o sistema
 - Permitir criar, editar e excluir uma reserva para clientes
