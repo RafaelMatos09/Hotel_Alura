@@ -17,6 +17,10 @@ import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.io.IOException;
+import java.sql.SQLException;
+
+import controller.UsuarioController;
 
 public class Login extends JFrame {
 
@@ -29,11 +33,13 @@ public class Login extends JFrame {
     private JTextField txtUsuario;
     private JPasswordField txtSenha;
     private JLabel labelExit;
+    private UsuarioController usuarioController;
 
     /**
      * Create the frame.
      */
     public Login() {
+        usuarioController = new UsuarioController();
         setResizable(false);
         setUndecorated(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -179,7 +185,11 @@ public class Login extends JFrame {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                Login();
+                try {
+                    Login();
+                } catch (SQLException | IOException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
         btnLogin.setBackground(SystemColor.textHighlight);
@@ -237,19 +247,27 @@ public class Login extends JFrame {
         });
     }
 
-    private void Login() {
-        String Usuario = "admin";
-        String Senha = "admin";
+    private void Login() throws SQLException, IOException {
+        String usuario = txtUsuario.getText();
+        char[] senhaChars = txtSenha.getPassword();
 
-        String senhaa = new String(txtSenha.getPassword());
+        if (senhaChars == null || senhaChars.length == 0) {
+            JOptionPane.showMessageDialog(this, "Senha não informada");
+            return;
+        }
 
-        if (txtUsuario.getText().equals(Usuario) && senhaa.equals(Senha)) {
+        String senha = new String(senhaChars);
+        String loginSenha = usuarioController.login(usuario);
+
+        if (loginSenha != null && loginSenha.equals(senha)) {
             MenuUsuario menu = new MenuUsuario();
             menu.setVisible(true);
             dispose();
         } else {
-            JOptionPane.showMessageDialog(this, "Usuario ou Senha não válidos");
+            JOptionPane.showMessageDialog(this, "Usuário ou Senha inválidos");
         }
+
+
     }
 
     //Código que permite movimentar a janela pela tela seguindo a posição de "x" e "y"
